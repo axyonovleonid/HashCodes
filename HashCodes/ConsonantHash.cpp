@@ -15,7 +15,7 @@ ConsonantHash::ConsonantHash()
 
 long long ConsonantHash::hashLetter(string str) {
 	long long count = 0;
-	string abc = "יצךםדרשחץתפגןנכהזקסלעüב";
+	string abc = "יצךםדרשחץתפגןנכהזקסלעüב"; //סמדכאסםûו
 	long long len = str.size();
 	for (int i = 0; i != len; i++) {
 		//		str[i] = tolower(str[i]);

@@ -1,19 +1,19 @@
-// HashCodes.cpp: определяет точку входа для консольного приложения.
+п»ї// HashCodes.cpp: РѕРїСЂРµРґРµР»СЏРµС‚ С‚РѕС‡РєСѓ РІС…РѕРґР° РґР»СЏ РєРѕРЅСЃРѕР»СЊРЅРѕРіРѕ РїСЂРёР»РѕР¶РµРЅРёСЏ.
 //
 
-#include "stdafx.h"
 #include <string>
 #include <iostream>
 #include <fstream>
 #include "Hash.h"
 #include <ctime>
+#include <vector>
 #include "VowelHash.h"
 #include "ConsonantHash.h"
 #include "VowConsHash.h"
 #include "AutorityHash.h"
 //#include <ofstream>
 
-#define DICTIONARY_SIZE 3000
+#define DICTIONARY_SIZE 1000
 
 using namespace std;
 void quickSortR(string *, long);
@@ -29,45 +29,41 @@ int main()
 	srand(time(NULL));
 
 	ifstream f("input.txt");
-
+	
 	string words[DICTIONARY_SIZE];
 	Hash h;
-	VowelHash h2;
-	ConsonantHash h3;
 	VowConsHash h4;
 	AutorityHash h5;
-
+	if (!f.is_open()) 
+		return -1;
 	for (int i = 0; i < DICTIONARY_SIZE; ) {
 		string tmp;
 		f >> tmp;
+		if (f.eof()) {
+			cout << "End of file";
+			return -1;
+		}
 		if (tmp.size() > 5) {
 			words[i] = tmp;
 			h.insert(words[i]);
-			h2.insert(words[i]);
-			h3.insert(words[i]);
 			h4.insert(words[i]);
 			h5.insert(words[i]);
 			i++;
 		}
 	}
 	string searchWord = words[rand() % DICTIONARY_SIZE];
-	//	string searchWord = "конхоида";
+
 	sortAndPrint(words, DICTIONARY_SIZE);
-	cout << endl << searchWord << endl;
+	h.show();
+	h4.show();
+	h5.show();
+	cout << "I'll search for this word: " << searchWord << endl;
 	clock_t start = clock();
 	cout << "Index in array: " << search(words, searchWord, DICTIONARY_SIZE) << endl;
 	cout << "Time array = " << clock() - start << endl;
 	start = clock();
 	h.search(searchWord);
 	cout << "Time letterHash = " << clock() - start << endl;
-
-	start = clock();
-	h2.search(searchWord);
-	cout << "Time vowelHash = " << clock() - start << endl;
-
-	start = clock();
-	h3.search(searchWord);
-	cout << "Time consonantHash = " << clock() - start << endl;
 
 	start = clock();
 	h4.search(searchWord);

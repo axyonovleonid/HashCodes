@@ -1,8 +1,8 @@
-#include "stdafx.h"
 #include "Hash.h"
 
 Hash::Hash()
 {
+	className = "LetterHash";
 	divisor = 37;
 	for (unsigned i = 0; i < divisor; i++) {
 		pair<unsigned, list<string>> p;

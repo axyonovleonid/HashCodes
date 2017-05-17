@@ -1,11 +1,11 @@
-#include "stdafx.h"
 #include "AutorityHash.h"
 
 AutorityHash::AutorityHash()
 {
-	divisor = 3;
+	className = "AutorityHash";
+	divisor = 3; //удобно брать простые числа. В нашем случае число может быть и небольшим.
 	for (int i = 0; i < 15; i++) {
-		hashDiv[i] = pow(divisor, i);
+		hashDiv[i] = pow(divisor, i); //считаем всего 14 степеней числа. Не так уж и много слов, длина которых больше 14 символов
 	}
 	for (unsigned i = 0; i < 5000; i++) {
 		pair<unsigned, list<string>> p;
