@@ -11,7 +11,8 @@
 #include "ConsonantHash.h"
 #include "VowConsHash.h"
 #include "AutorityHash.h"
-//#include <ofstream>
+#include <locale>
+#include <Windows.h>
 
 #define DICTIONARY_SIZE 1000
 
@@ -28,6 +29,10 @@ int main()
 	setlocale(LC_ALL, "");
 	srand(time(NULL));
 
+	system("color F0"); //F - белый цвет консоли, 0 - черный цвет текста
+	setlocale(0, "");//поддержка русского языка
+	SetConsoleCP(1251);// установка кодовой страницы win-cp 1251 в поток ввода, поддержка русского языка
+	SetConsoleOutputCP(1251); // установка кодовой страницы win-cp 1251 в поток вывода, поддержка русского языка
 	ifstream f("input.txt");
 	
 	string words[DICTIONARY_SIZE];
@@ -43,7 +48,7 @@ int main()
 			cout << "End of file";
 			return -1;
 		}
-		if (tmp.size() > 5) {
+		if (tmp.size() > 2) {
 			words[i] = tmp;
 			h.insert(words[i]);
 			h4.insert(words[i]);
@@ -51,13 +56,16 @@ int main()
 			i++;
 		}
 	}
-	string searchWord = words[rand() % DICTIONARY_SIZE];
-
+	cout << "Input the word:" << endl;
+	
+	string searchWord;
+	std::cin >> searchWord;
+	
+	cout << "Looking for the " << searchWord << endl;
 	sortAndPrint(words, DICTIONARY_SIZE);
 	h.show();
 	h4.show();
 	h5.show();
-	cout << "I'll search for this word: " << searchWord << endl;
 	clock_t start = clock();
 	cout << "Index in array: " << search(words, searchWord, DICTIONARY_SIZE) << endl;
 	cout << "Time array = " << clock() - start << endl;
