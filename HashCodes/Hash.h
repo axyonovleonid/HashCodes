@@ -10,7 +10,7 @@ class Hash :
 	public AbsHash
 {
 protected:
-	long long hashLetter(string);
+	long long hashLetter(string); //метод для получения хеш-ключа
 public:
 	Hash();
 	~Hash();
